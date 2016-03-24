@@ -6,3 +6,12 @@ body {
 a {
   color: #00B7FF;
 }
+
+.page-header {
+	font-size: 20px;
+	width: 800px;
+	height: 30px;
+	color: black;
+}
+
+

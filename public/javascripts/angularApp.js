@@ -1,3 +1,5 @@
+'use strict';
+
 var app = angular.module('flapperNews', ['ui.router']);
 
 app.config([
@@ -8,7 +10,7 @@ app.config([
   $stateProvider
     .state('home', {
       url: '/home',
-      templateUrl: 'home/_home.html',
+      templateUrl: '/home.html',
       controller: 'MainCtrl',
       resolve: {
         postPromise: ['posts', function(posts) {
@@ -18,7 +20,7 @@ app.config([
     })
     .state('posts', {
       url: '/posts/{id}',
-      templateUrl: 'posts/_posts.html',
+      templateUrl: '/posts.html',
       controller: 'PostsCtrl',
       resolve: {
         post: ['$stateParams', 'posts', function($stateParams, posts) {
@@ -36,7 +38,7 @@ app.factory('posts', ['$http', function($http) {
   };
   return o;
 
-  o.getAll = function() {
+  o.getAll = function($http) {
     return $http.get('/posts').success(function(data) {
       angular.copy(data, o.posts);
     });
@@ -67,7 +69,7 @@ app.factory('posts', ['$http', function($http) {
 
   o.upvoteComment = function(post, comment) {
     return $http.put('/posts/' + post._id + '/comments/' + comment._id + '/upvote')
-      .success(fucntion(data) {
+      .success(function(data) {
         comment.upvotes += 1;
       });
   };
