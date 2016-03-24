@@ -76,7 +76,7 @@ router.post('/posts/:post/comments', function(req, res, next) {
 	});
 });
 
-router.param(':comment', function(req, res, next, id) {
+router.param('comment', function(req, res, next, id) {
 	var query = Comment.findById(id);
 
 	query.exec(function (err, comment) {
